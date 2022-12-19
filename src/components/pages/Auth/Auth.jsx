@@ -5,15 +5,18 @@ import Field from "../../ui/Field/Field"
 import { useState } from "react"
 import Button from "../../ui/Button/Button"
 import styles from "./Auth.module.scss"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import Alert from "../../ui/Alert/Alert"
 import { useMutation } from "react-query"
 import { $api } from "../../../api/api"
 import Loader from "../../ui/Loader"
+import { useAuth } from "../../../hooks/useAuth"
 const Auth = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [type, setType] = useState("auth")
+  const navigate = useNavigate()
+  const { setIsAuth } = useAuth()
 
   const {
     mutate: register,
@@ -30,7 +33,11 @@ const Auth = () => {
       }),
     {
       onSuccess(data) {
-        console.log(data)
+        localStorage.setItem("token", data.token)
+        setIsAuth(true)
+        setEmail("")
+        setPassword("")
+        navigate("/")
       },
     }
   )

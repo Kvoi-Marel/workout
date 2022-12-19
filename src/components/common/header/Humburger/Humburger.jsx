@@ -5,20 +5,33 @@ import { menu } from "./menuBase"
 import haburgerImage from "../../../../images/header/hamburger.svg"
 import haburgerClose from "../../../../images/header/hamburger-close.svg"
 import styles from "./Humburger.module.scss"
+import { useAuth } from "../../../../hooks/useAuth"
+import { useOutsideAlerter } from "../../../../hooks/useOutsideAlerter"
 const Humburger = () => {
-  const [show, setShow] = useState(false)
+  const { setIsAuth } = useAuth()
+  const { ref, isComponentVisible, setIsComponentVisible } =
+    useOutsideAlerter(false)
 
   const handleLogout = () => {
-    console.log("Logout")
+    localStorage.removeItem("token")
+    setIsAuth(true)
+    setIsComponentVisible(false)
   }
 
   return (
-    <div className={styles.wrapper}>
-      <button type="button" onClick={() => setShow(!show)}>
-        <img src={show ? haburgerClose : haburgerImage} alt="" height="24" />
+    <div className={styles.wrapper} ref={ref}>
+      <button
+        type="button"
+        onClick={() => setIsComponentVisible(!isComponentVisible)}
+      >
+        <img
+          src={isComponentVisible ? haburgerClose : haburgerImage}
+          alt=""
+          height="24"
+        />
       </button>
-      <nav className={show ? styles.menu : ""}>
-        {show && (
+      <nav className={isComponentVisible ? styles.menu : ""}>
+        {isComponentVisible && (
           <ul>
             {menu.map((item) => (
               <li key={item.title}>
