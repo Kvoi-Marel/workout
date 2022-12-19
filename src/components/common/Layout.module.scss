@@ -1,0 +1,35 @@
+@import "../../scss/variables";
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+
+  padding: 25px;
+  margin: 0;
+
+  height: 100%;
+  max-width: 560px;
+  width: 100%;
+
+  margin-left: auto;
+  margin-right: auto;
+
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  &.otherPage {
+    margin-left: auto;
+    margin-right: auto;
+    height: 280px;
+    border-radius: 0 0 20px 20px;
+    box-shadow: $bx-accent;
+  }
+}
+
+.heading {
+  text-transform: uppercase;
+  color: $white;
+  font-size: 28px;
+  font-weight: bold;
+}

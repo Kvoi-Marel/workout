@@ -1,0 +1,10 @@
+.wrapper {
+  padding: 50px 90px;
+  // text-align: center;
+  > form {
+    max-width: 560px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
