@@ -1,0 +1,54 @@
+@import "../../../scss/variables";
+
+.wrapper {
+  padding-left: 0;
+  padding-right: 0;
+  text-align: center;
+
+  max-width: 560px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.time {
+  color: #deb6b6;
+  font-size: 20px;
+}
+
+.workoutsList {
+  > div.item {
+    margin: 0 auto;
+    margin-bottom: 30px;
+    background-color: $purple;
+    color: $white;
+    width: 90%;
+    border-radius: 10px;
+
+    > button,
+    > a {
+      padding: 14px 20px;
+      margin-top: 30px;
+      font-size: 20px;
+      color: $white;
+      text-decoration: none;
+      justify-content: space-between;
+      display: flex;
+      align-items: center;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    &.completed {
+      background-color: $dark-purple;
+    }
+  }
+
+  .line {
+    width: 100%;
+    height: 1px;
+    background-color: $dark-purple;
+    margin-bottom: 30px;
+  }
+}

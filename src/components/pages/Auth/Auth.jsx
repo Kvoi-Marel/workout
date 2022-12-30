@@ -18,6 +18,14 @@ const Auth = () => {
   const navigate = useNavigate()
   const { setIsAuth } = useAuth()
 
+  const successLogin = (token) => {
+    localStorage.setItem("token", token)
+    setIsAuth(true)
+    setEmail("")
+    setPassword("")
+    navigate("/")
+  }
+
   const {
     mutate: register,
     isLoading,
@@ -33,11 +41,27 @@ const Auth = () => {
       }),
     {
       onSuccess(data) {
-        localStorage.setItem("token", data.token)
-        setIsAuth(true)
-        setEmail("")
-        setPassword("")
-        navigate("/")
+        successLogin(data.token)
+      },
+    }
+  )
+
+  const {
+    mutate: auth,
+    isLoading: isLoadingAuth,
+    error: errorAuth,
+  } = useMutation(
+    "Auth",
+    () =>
+      $api({
+        url: "/users/login",
+        type: "POST",
+        body: { email, password },
+        auth: false,
+      }),
+    {
+      onSuccess(data) {
+        successLogin(data.token)
       },
     }
   )
@@ -46,7 +70,7 @@ const Auth = () => {
     e.preventDefault()
 
     if (type === "auth") {
-      console.log("auth")
+      auth()
     } else {
       register()
     }
@@ -57,7 +81,8 @@ const Auth = () => {
       <Layout bgImage={bgImage} heading="Auth || Register" />
       <div className={styles.wrapper}>
         {error && <Alert type="error" text={error} />}
-        {isLoading && <Loader />}
+        {errorAuth && <Alert type="error" text={error} />}
+        {(isLoading || isLoadingAuth) && <Loader />}
         <form onSubmit={handleSubmit}>
           <Field
             type="email"

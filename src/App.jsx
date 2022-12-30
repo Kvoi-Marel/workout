@@ -1,16 +1,23 @@
 import React from "react"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
-import Auth from "./components/pages/Auth/Auth"
-import Home from "./components/pages/home/Home"
-import NewWorkout from "./components/pages/NewWorkout/NewWorkout"
+import Error404 from "./components/pages/404"
+import { useAuth } from "./hooks/useAuth"
+
+import { routes } from "./routes"
 
 const App = () => {
+  const { isAuth } = useAuth()
   return (
     <BrowserRouter>
       <Routes>
-        <Route exact path="/" element={<Home />} />
-        <Route path="/new-workout" element={<NewWorkout />} />
-        <Route path="/auth" element={<Auth />} />
+        {routes.map((route) => (
+          <Route
+            key={route.component}
+            exact={route.exact}
+            path={route.path}
+            element={<route.component />}
+          />
+        ))}
       </Routes>
     </BrowserRouter>
   )

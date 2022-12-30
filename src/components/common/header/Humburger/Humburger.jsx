@@ -14,7 +14,7 @@ const Humburger = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("token")
-    setIsAuth(true)
+    setIsAuth(false)
     setIsComponentVisible(false)
   }
 
@@ -28,6 +28,7 @@ const Humburger = () => {
           src={isComponentVisible ? haburgerClose : haburgerImage}
           alt=""
           height="24"
+          draggable={false}
         />
       </button>
       <nav className={isComponentVisible ? styles.menu : ""}>

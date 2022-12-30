@@ -1,0 +1,34 @@
+@import "../../../scss/variables";
+
+.wrapper {
+  padding-left: 0;
+  padding-right: 0;
+  text-align: center;
+
+  max-width: 560px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.beforeAfter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 30px;
+
+  > div {
+    width: 48%;
+  }
+  img {
+    border-radius: 10px;
+  }
+  .heading {
+    margin-bottom: 0.5rem;
+  }
+}
+
+.center {
+  text-align: center;
+  margin: 6px 0 18px;
+}
