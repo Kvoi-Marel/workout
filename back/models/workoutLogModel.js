@@ -1,6 +1,7 @@
 import mongoose from "mongoose"
 
 const { ObjectId } = mongoose.Schema
+
 const workoutLogSchema = mongoose.Schema(
   {
     user: {
@@ -9,8 +10,8 @@ const workoutLogSchema = mongoose.Schema(
       required: true,
     },
     workout: { type: ObjectId, ref: "Workout", required: true },
-    completed: { type: Boolean, default: true },
-    exercisesLogs: [
+    completed: { type: Boolean, default: false },
+    exerciseLogs: [
       {
         type: ObjectId,
         ref: "ExerciseLog",

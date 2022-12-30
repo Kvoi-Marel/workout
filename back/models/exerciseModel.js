@@ -1,7 +1,8 @@
 import mongoose from "mongoose"
+
 const exerciseSchema = mongoose.Schema(
   {
-    name: { type: String, require: true },
+    name: { type: String, required: true },
     times: {
       type: Number,
       required: true,

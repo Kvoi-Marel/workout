@@ -1,7 +1,10 @@
-import Exercise from "../../models/exerciseModel.js"
 import asyncHandler from "express-async-handler"
+import Exercise from "../../models/exerciseModel.js"
 
-export const addNewExercise = asyncHandler(async (req, res) => {
+// @desc    Create new exercise
+// @route   POST /api/exercises
+// @access  Private
+export const createNewExercise = asyncHandler(async (req, res) => {
   const { name, times, imageName } = req.body
 
   const exercise = await Exercise.create({
@@ -13,6 +16,9 @@ export const addNewExercise = asyncHandler(async (req, res) => {
   res.json(exercise)
 })
 
+// @desc    Update exercise
+// @route   PUT /api/exercises
+// @access  Private
 export const updateExercise = asyncHandler(async (req, res) => {
   const { name, times, imageName, exerciseId } = req.body
 
@@ -20,7 +26,7 @@ export const updateExercise = asyncHandler(async (req, res) => {
 
   if (!exercise) {
     res.status(404)
-    throw new Error("Данное упражнение не найдено")
+    throw new Error("Данное упражнение не найдено!")
   }
 
   exercise.name = name
@@ -28,9 +34,13 @@ export const updateExercise = asyncHandler(async (req, res) => {
   exercise.imageName = imageName
 
   const updatedExercise = await exercise.save()
+
   res.json(updatedExercise)
 })
 
+// @desc    Delete exercise
+// @route   DELETE /api/exercises
+// @access  Private
 export const deleteExercise = asyncHandler(async (req, res) => {
   const { exerciseId } = req.body
 
@@ -38,14 +48,18 @@ export const deleteExercise = asyncHandler(async (req, res) => {
 
   if (!exercise) {
     res.status(404)
-    throw new Error("Данное упражнение не найдено")
+    throw new Error("Данное упражнение не найдено!")
   }
 
   await exercise.remove()
-  res.json({ message: "Упражнение было удалено" })
+
+  res.json({ message: "Exercise has been removed" })
 })
 
-export const getExercise = asyncHandler(async (req, res) => {
+// @desc    Get exercises
+// @route   GET /api/exercises
+// @access  Private
+export const getExercises = asyncHandler(async (req, res) => {
   const exercises = await Exercise.find({})
 
   res.json(exercises)
